@@ -31,7 +31,6 @@ public abstract class AbstractBasePage {
     }
 
     public String getPageLogoText(){
-
         return pageLogo.getText();
     }
 
