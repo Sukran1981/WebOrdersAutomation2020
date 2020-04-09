@@ -6,14 +6,16 @@ import static org.testng.Assert.*;
 
 public class LoginTests extends AbstractBaseTest {
 
+
     @Test
-   public void login(){
-        extentTest=extentReports.createTest("Verify page logo");
-        //for extends report
-        LoginPage loginPage=new LoginPage();
+    public void login(){
+        extentTest = extentReports.createTest("Verify page logo");
+
+        LoginPage loginPage = new LoginPage();
         loginPage.login();
-        assertEquals(loginPage.getPageLogoText(),"Web Orders");
+        assertEquals(loginPage.getPageLogoText(), "Web Orders");
 
         extentTest.pass("Logo verified!");
     }
 }
+

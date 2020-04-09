@@ -16,6 +16,11 @@ import java.util.List;
 
 public class BrowserUtilities {
 
+    /**
+     * Pause test for some time
+     *
+     * @param seconds
+     */
     public static void wait(int seconds) {
         try {
             Thread.sleep(1000 * seconds);
@@ -24,20 +29,25 @@ public class BrowserUtilities {
         }
     }
 
+    /**
+     * @param elements represents collection of WebElements
+     * @return collection of strings
+     */
     public static List<String> getTextFromWebElements(List<WebElement> elements) {
         List<String> textValues = new ArrayList<>();
         for (WebElement element : elements) {
-            textValues.add(element.getText());
+            if (!element.getText().isEmpty()) {
+                textValues.add(element.getText());
+            }
         }
         return textValues;
     }
 
-    //*
-    // waits for backgrounds processes on the browser to complete
-    // *
-    // * @param timeOutInSeconds
-
-
+    /**
+     * waits for backgrounds processes on the browser to complete
+     *
+     * @param timeOutInSeconds
+     */
     public static void waitForPageToLoad(long timeOutInSeconds) {
         ExpectedCondition<Boolean> expectation = driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
         try {
@@ -58,30 +68,31 @@ public class BrowserUtilities {
         ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].click();", element);
     }
 
-
-    //**Scroll to element using JavaScript
-    // @param element
-    //
+    /**
+     * Scroll to element using JavaScript
+     *
+     * @param element
+     */
     public static void scrollTo(WebElement element) {
         ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
     }
-    /*
 
-     *
+    /**
+     * @param name screenshot name
+     * @return path to the screenshot
      */
-
-
     public static String getScreenshot(String name) {
-
         //adding date and time to screenshot name, to make screenshot unique
-        name = new Date().toString().replace(" ", "_") .replace(":","-")+ "_" + name;
+        name = new Date().toString().replace(" ", "_").replace(":", "-") + "_" + name;
         //where we gonna store a screenshot
         String path = "";
+
         if (System.getProperty("os.name").toLowerCase().contains("mac")) {
             path = System.getProperty("user.dir") + "/test-output/screenshots/" + name + ".png";
         } else {
             path = System.getProperty("user.dir") + "\\test-output\\screenshots\\" + name + ".png";
         }
+
         System.out.println("OS name: " + System.getProperty("os.name"));
         System.out.println("Screenshot is here: " + path);
         //since our reference type is a WebDriver
@@ -100,7 +111,4 @@ public class BrowserUtilities {
         }
         return path;
     }
-
-
-
 }

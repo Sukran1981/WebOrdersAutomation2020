@@ -9,33 +9,24 @@ import org.openqa.selenium.support.FindBy;
 import javax.security.auth.login.Configuration;
 
 public class LoginPage extends AbstractBasePage {
-    @FindBy(id="ctl00_MainContent_username")
+    @FindBy(id = "ctl00_MainContent_username")
     private WebElement userName;
 
-    @FindBy(id="ctl00_MainContent_password")
+    @FindBy(id = "ctl00_MainContent_password")
     private WebElement password;
 
 
-    public void login(){
-
+    public void login() {
         BrowserUtilities.wait(2);
-        String usernameValue= ConfigurationReader.getProperty("username");
-
-        String passwordValue= ConfigurationReader.getProperty("password");
-
+        String usernameValue = ConfigurationReader.getProperty("username");
+        String passwordValue = ConfigurationReader.getProperty("password");
         userName.sendKeys(usernameValue);
-
         password.sendKeys(passwordValue, Keys.ENTER);
-
     }
-    public void login(String usernameValue,String passwordValue){
 
+    public void login(String usernameValue, String passwordValue) {
+        BrowserUtilities.wait(2);
         userName.sendKeys(usernameValue);
-        password.sendKeys(passwordValue,Keys.ENTER);
+        password.sendKeys(passwordValue, Keys.ENTER);
     }
-
-
-
-
-
 }
